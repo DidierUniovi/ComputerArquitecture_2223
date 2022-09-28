@@ -14,9 +14,10 @@ int main(int argc, char* argv[])
 
 	// Start measuring time
 	printf("Running task    : ");
+	clock_gettime(CLOCK_REALTIME, &tStart);
 	fflush(stdout);
 
-	if(clock_gettime(CLOCK_REALTIME, &tStart) == -1)
+	#error *** Complete ***
 	{
 		perror("clock_gettime");
 		exit(EXIT_FAILURE);
