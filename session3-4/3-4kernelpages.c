@@ -150,8 +150,25 @@ int main()
 		codeFrame, codeFlags,
 		dataFrame, dataFlags
 		bssFrame,  bssFlags */
-	<<Complete>>
-	
+	if(get_pte((void *)(codePage << 12), pte)){
+		perror("Linmem module error");
+		return EXIT_FAILURE;
+	}
+	codeFrame = pte & 0xFFFFF000;
+	codeFlags = pte & 0x00000FFF;
+	if(get_pte((void *)(dataPage << 12), pte)){
+		perror("Linmem module error");
+		return EXIT_FAILURE;
+	}
+	dataFrame = pte & 0xFFFFF000;
+	dataFlags = pte & 0x00000FFF;
+	if(get_pte((void *)(bssPage << 12), pte)){
+		perror("Linmem module error");
+		return EXIT_FAILURE;
+	}
+	bssFrame = pte & 0xFFFFF000;
+	bssFlags = pte & 0x00000FFF;
+
 	printf("\nKernel code page %05Xh ---> Frame: %05Xh; Flags: %03Xh\n", codePage, codeFrame, codeFlags);
 	printf("Kernel data page %05Xh ---> Frame: %05Xh; Flags: %03Xh\n", dataPage, dataFrame, dataFlags);	
 	printf("Kernel bss  page %05Xh ---> Frame: %05Xh; Flags: %03Xh\n\n", bssPage, bssFrame, bssFlags);	
