@@ -1,3 +1,3 @@
-# General #
+# What's this about? #
 
-Repository for Computer Architecture
+Here you will find all the exercises done through the AC_2223 course.
